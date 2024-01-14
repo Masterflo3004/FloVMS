@@ -1,7 +1,7 @@
 /* ========NOTES=========
 Bits: 32
 Opcode 
-00000001000000010000000100001010
+00000001 00000001 00000001 00001010
 */
 //-------Inports-----------
 #include <stdint.h>
@@ -19,7 +19,7 @@ Opcode
 //--------code--------------
 enum registers{r0=0, r1, r2, r3, r4, r5, r6, r7, r8, r9, RPC, RCND, RCNT};
 uint32_t reg[RCNT];
-int32_t memory[__UINT16_MAX__];
+uint32_t memory[__UINT16_MAX__];
 uint32_t startPC = 0x3000;
 
 int ext(uint32_t i){
@@ -74,7 +74,7 @@ void loadprogramm(char *filename){
             fread(&memory[startPC + i], sizeof(uint32_t), 1, file);
         }
     } else{
-        printf("File not found");
+        printf("File not found\b");
     }
 }
 
@@ -89,7 +89,9 @@ int main(){
     printf("Programm run successfully\n");
     printf("%d\n",reg[r0]);
     printf("%d\n",reg[r1]);
-    printf("%d\n",reg[r2]);
+    printf("%d\n",reg[r5]);
+    printf("%d\n", memory[10000]);
+    printf("%d\n", reg[r3]);
     return 1;
     
 }
