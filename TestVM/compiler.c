@@ -52,7 +52,7 @@ int main(){
         
             fwrite(&binary, sizeof(uint32_t), 1, wfile);
             printf("compiled add %d\n", binary);
-        }else if (strcmp(ptr, "add2")){
+        }else if (strcmp(ptr, "add2")==0){
             binary = 0b00000011000000000000000000000000;
             ptr = strtok(NULL, " ");
             if(ptr[0]=='r'){ptr+=1;}
@@ -73,7 +73,7 @@ int main(){
             fwrite(&binary, sizeof(uint32_t), 1, wfile);
             printf("compiled add2 %d\n", binary);
 
-        }else if (strcmp(ptr, "load")){
+        }else if (strcmp(ptr, "load")==0){
             binary = 0b00000100000000000000000000000000;
             ptr = strtok(NULL, "");
             if(ptr[0]=='r'){ptr+=1;};
@@ -81,24 +81,24 @@ int main(){
             binary |= (uint32_t)num <<16;
 
             ptr = strtok(NULL, " ");
-            if(ptr[0]=='r'){ptr+=1;}
-            num = (uint16_t)atoi(ptr);
-            binary |= (uint32_t)num;
+            if(ptr && ptr[0]=='r'){ptr+=1;}
+            uint16_t num16 = (uint16_t)atoi(ptr);
+            binary |= (uint32_t)num16;
             
             fwrite(&binary, sizeof(uint32_t), 1, wfile);
             printf("compiled load %d\n", binary);
 
-        }else if (strcmp(ptr, "save")){
+        }else if (strcmp(ptr, "save")==0){
             binary = 0b00000101000000000000000000000000;
             ptr = strtok(NULL, "");
             if(ptr[0]=='r'){ptr+=1;};
             uint8_t num = (uint8_t)atoi(ptr);
             binary |= (uint32_t)num <<16;
-            /*
+            
             ptr = strtok(NULL, " ");
-            if(ptr[0]=='r'){ptr+=1;}
-            num = (uint16_t)atoi(ptr);
-            binary |= (uint32_t)num;*/
+            if(ptr && ptr[0]=='r'){ptr+=1;}
+            uint16_t num16 = (uint16_t)atoi(ptr);
+            binary |= (uint32_t)num16;
 
             fwrite(&binary, sizeof(uint32_t), 1, wfile);
             printf("compiled save %d\n", binary);
