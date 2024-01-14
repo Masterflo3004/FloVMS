@@ -27,6 +27,7 @@ int ext(uint32_t i){
 }
 int mov(uint32_t i){
     reg[inst1(i)] = inst2(i);
+    printf("set %d to %d",inst1(i), inst2(i));
     return 1;
 }
 int add(uint32_t i){
@@ -81,14 +82,14 @@ void loadprogramm(char *filename){
 
 int main(){
     char file[128]; 
-    printf("Enter Filename To load (max 128 characters)");
+    printf("Enter Filename To load (max 128 characters)\n");
     scanf("%s", file);
     loadprogramm(file);
     run();
     printf("Programm run successfully\n");
     printf("%d\n",reg[r0]);
+    printf("%d\n",reg[r1]);
     printf("%d\n",reg[r2]);
-    printf("%d\n",reg[r3]);
     return 1;
     
 }
