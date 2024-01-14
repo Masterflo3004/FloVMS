@@ -14,10 +14,10 @@ int main(){
     while(fgets(line, 128, file)){
         char *ptr= strtok(line, " ");
         __int32_t binary;
-        if(ptr == "ext"){
+        if(trcmp(ptr, "ext")){
             binary = 0b00000000000000000000000000000000;
             fwrite(&binary, sizeof(__int32_t), 1, wfile);
-        } else if(ptr == "mov"){
+        } else if(strcmp(ptr, "mov")){
             binary = 0b00000001000000000000000000000000;
             *ptr = strtok(NULL, " ");
             int8_t num = (int8_t)atoi(ptr+1);
@@ -26,7 +26,7 @@ int main(){
             num = (int8_t)atoi(ptr+1);
             binary |= (int32_t)num << 16;
             fwrite(binary, sizeof(__int32_t), 1, wfile);
-        } else if (ptr == "add"){
+        } else if (trcmp(ptr, "add")){
             binary = 0b00000010000000000000000000000000;
             *ptr = strtok(NULL, "r");
             int8_t num = (int8_t)atoi(ptr);
@@ -40,14 +40,14 @@ int main(){
             *ptr = strtok(NULL, " ");
             num = (int8_t)atoi(ptr+1);
             binary |= (int32_t)num;
-        }/* else if (ptr == "add2"){
+        }/* else if (trcmp(ptr, "add2")){
 
-        }else if (ptr == "load"){
+        }else if (trcmp(ptr, "load")){
 
-        }else if (ptr == "save"){
+        }else if (trcmp(ptr, "save")){
             
         }*/ else{
-            printf("Error");
+            printf("Error|n");
         }
     }
     fclose(file);
