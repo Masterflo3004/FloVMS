@@ -85,8 +85,10 @@ int main(){
     scanf("%s", file);
     loadprogramm(file);
     run();
-    printf("Programm run successfully");
-    printf("%d",reg[r5]);
+    printf("Programm run successfully\n");
+    printf("%d\n",reg[r0]);
+    printf("%d\n",reg[r2]);
+    printf("%d\n",reg[r3]);
     return 1;
     
 }
