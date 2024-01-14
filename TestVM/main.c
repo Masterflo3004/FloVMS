@@ -63,7 +63,18 @@ void run(){
 }
 
 void loadprogramm(char *filename){
-    FILE *file = fopen(*filename, "rb")
+    FILE *file = fopen(filename, "rb");
+    
+    if(file != NULL){
+        fseek(file, 0, SEEK_END);
+        long filesize = ftell(file)/4;
+        fseek(file,0, SEEK_SET);
+        for(int i = 0; i<filesize; i++){
+            fread(&memory[startPC + i], sizeof(uint32_t), 1, file);
+        }
+    } else{
+        printf("File not found");
+    }
 }
 
 
