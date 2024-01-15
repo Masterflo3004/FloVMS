@@ -8,4 +8,5 @@ add2 r5 r5 2
 load r3 1000
 coutl r3
 coutl r5
+jmp 7
 ext

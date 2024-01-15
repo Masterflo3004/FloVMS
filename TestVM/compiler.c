@@ -112,7 +112,7 @@ int main(){
             fwrite(&binary, sizeof(uint32_t), 1, wfile);
             printf("compiled cout %d\n", binary);
 
-        }else if(strcmp(ptr, "coutl")){
+        }else if(strcmp(ptr, "coutl")==0){
             binary = 0b00000111000000000000000000000000;
             ptr = strtok(NULL, " ");
             if(ptr[0]=='r'){ptr+=1;}
@@ -121,8 +121,18 @@ int main(){
 
             fwrite(&binary, sizeof(uint32_t), 1, wfile);
             printf("compiled coutl %d\n", binary);
-        }else{
-            printf("Error|n");
+        }else if(strcmp(ptr, "jmp")==0){
+            binary = 0b00001000000000000000000000000000;
+            ptr = strtok(NULL, " ");
+            if(ptr[0]=='r'){ptr+=1;}
+            uint8_t num = (uint8_t)atoi(ptr);
+            binary |= (uint32_t)num << 16;
+
+            fwrite(&binary, sizeof(uint32_t), 1, wfile);
+            printf("compiled jmp %d\n", binary);
+
+        } else{
+            printf("Error\n");
         }
     }
     fclose(file);

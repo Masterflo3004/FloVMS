@@ -27,7 +27,6 @@ int ext(uint32_t i){ //exit 0
 }
 int mov(uint32_t i){ //mov 1
     reg[inst1(i)] = inst2(i);
-    printf("set %d to %d",inst1(i), inst2(i));
     return 1;
 }
 int add(uint32_t i){ //add 2
@@ -47,17 +46,24 @@ int save(uint32_t i){ //save 5
     return 1;
 }
 int cout(uint32_t i){ //cout 6
-    printf("%d",inst1(i));
+    printf("%d",reg[inst1(i)]);
     return 1;
 }
 int coutl(uint32_t i){ //coutl 7
-    printf("%d\n",inst1(i));
+    printf("%d\n",reg[inst1(i)]);
     return 1;
 }
+int jmp(uint32_t i){ //jmp 8
+    reg[RPC]=startPC + inst1(i);
+    return 1;
+}/*
+int jmpeq(uint32_t i){
+    if(reg[inst1(i)]==reg[inst2(i)])
+}*/
 
 
 typedef int (*opc_f)(uint32_t instruction);
-opc_f funcs[__UINT8_MAX__]={ext, mov, add, add2,load, save, cout, coutl};
+opc_f funcs[__UINT8_MAX__]={ext, mov, add, add2,load, save, cout, coutl, jmp};
 
 
 void run(){
