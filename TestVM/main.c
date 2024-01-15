@@ -73,6 +73,7 @@ void run(){
         int i = memory[reg[RPC]];
         running = funcs[OPC(i)](i);
         reg[RPC]++;
+        
     }
     
 }

@@ -5,7 +5,7 @@
 int main(){
     char filename[128];
     printf("Input filename to compile (max 128 characters):\n");
-    scanf("%s",&filename);
+    scanf("%s \n",&filename);
     printf("Reading File...");
     FILE *file = fopen(filename, "r");
     FILE *wfile = fopen(strcat(filename, ".bin"), "wb");
