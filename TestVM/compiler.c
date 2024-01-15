@@ -75,7 +75,7 @@ int main(){
 
         }else if (strcmp(ptr, "load")==0){
             binary = 0b00000100000000000000000000000000;
-            ptr = strtok(NULL, "");
+            ptr = strtok(NULL, " ");
             if(ptr[0]=='r'){ptr+=1;};
             uint16_t num = (uint8_t)atoi(ptr);
             binary |= (uint32_t)num <<16;
@@ -90,19 +90,37 @@ int main(){
 
         }else if (strcmp(ptr, "save")==0){
             binary = 0b00000101000000000000000000000000;
-            ptr = strtok(NULL, "");
+            ptr = strtok(NULL, " ");
             if(ptr[0]=='r'){ptr+=1;};
             uint8_t num = (uint8_t)atoi(ptr);
             binary |= (uint32_t)num <<16;
             
             ptr = strtok(NULL, " ");
-            if(ptr && ptr[0]=='r'){ptr+=1;}
             uint16_t num16 = (uint16_t)atoi(ptr);
             binary |= (uint32_t)num16;
 
             fwrite(&binary, sizeof(uint32_t), 1, wfile);
             printf("compiled save %d\n", binary);
 
+        }else if(strcmp(ptr, "cout")==0){
+            binary = 0b00000110000000000000000000000000;
+            ptr = strtok(NULL, " ");
+            if(ptr[0]=='r'){ptr+=1;}
+            uint8_t num = (uint8_t)atoi(ptr);
+            binary |= (uint32_t)num <<16;
+
+            fwrite(&binary, sizeof(uint32_t), 1, wfile);
+            printf("compiled cout %d\n", binary);
+
+        }else if(strcmp(ptr, "coutl")){
+            binary = 0b00000111000000000000000000000000;
+            ptr = strtok(NULL, " ");
+            if(ptr[0]=='r'){ptr+=1;}
+            uint8_t num = (uint8_t)atoi(ptr);
+            binary |= (uint32_t)num << 16;
+
+            fwrite(&binary, sizeof(uint32_t), 1, wfile);
+            printf("compiled coutl %d\n", binary);
         }else{
             printf("Error|n");
         }

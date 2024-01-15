@@ -22,34 +22,42 @@ uint32_t reg[RCNT];
 uint32_t memory[__UINT16_MAX__];
 uint32_t startPC = 0x3000;
 
-int ext(uint32_t i){
+int ext(uint32_t i){ //exit 0
     return 0;
 }
-int mov(uint32_t i){
+int mov(uint32_t i){ //mov 1
     reg[inst1(i)] = inst2(i);
     printf("set %d to %d",inst1(i), inst2(i));
     return 1;
 }
-int add(uint32_t i){
+int add(uint32_t i){ //add 2
     reg[inst1(i)] = reg[inst2(i)] + reg[inst3(i)];
     return 1;
 }
-int add2(uint32_t i){
+int add2(uint32_t i){ //add2 3
     reg[inst1(i)] = reg[inst2(i)] + inst3(i);
     return 1;
 }
-int load(uint32_t i){
+int load(uint32_t i){ //load 4
     reg[inst1(i)]=memory[instmem(i)];
     return 1;
 }
-int save(uint32_t i){
+int save(uint32_t i){ //save 5
     memory[instmem(i)]= reg[inst1(i)];
+    return 1;
+}
+int cout(uint32_t i){ //cout 6
+    printf("%d",inst1(i));
+    return 1;
+}
+int coutl(uint32_t i){ //coutl 7
+    printf("%d\n",inst1(i));
     return 1;
 }
 
 
 typedef int (*opc_f)(uint32_t instruction);
-opc_f funcs[__UINT8_MAX__]={ext, mov, add, add2,load, save};
+opc_f funcs[__UINT8_MAX__]={ext, mov, add, add2,load, save, cout, coutl};
 
 
 void run(){
@@ -87,11 +95,6 @@ int main(){
     loadprogramm(file);
     run();
     printf("Programm run successfully\n");
-    printf("%d\n",reg[r0]);
-    printf("%d\n",reg[r1]);
-    printf("%d\n",reg[r5]);
-    printf("%d\n", memory[10000]);
-    printf("%d\n", reg[r3]);
     return 1;
     
 }
