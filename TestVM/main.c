@@ -54,16 +54,25 @@ int coutl(uint32_t i){ //coutl 7
     return 1;
 }
 int jmp(uint32_t i){ //jmp 8
-    reg[RPC]=startPC + inst1(i);
+    reg[RPC]=startPC-1 + inst1(i);
     return 1;
-}/*
-int jmpeq(uint32_t i){
-    if(reg[inst1(i)]==reg[inst2(i)])
-}*/
+}
+int jmpeq(uint32_t i){ //jmpeq 9
+    if(reg[inst1(i)]==reg[inst2(i)]){
+        reg[RPC]=startPC-1+inst3(i);
+    }
+    return 1;
+}
+int jmpueq(uint32_t i){ //jmpueq 10
+    if(reg[inst1(i)]!=reg[inst2(i)]){
+        reg[RPC]=startPC-1+inst3(i);
+    }
+    return 1;
+}
 
 
 typedef int (*opc_f)(uint32_t instruction);
-opc_f funcs[__UINT8_MAX__]={ext, mov, add, add2,load, save, cout, coutl, jmp};
+opc_f funcs[__UINT8_MAX__]={ext, mov, add, add2,load, save, cout, coutl, jmp, jmpeq, jmpueq};
 
 
 void run(){

@@ -5,8 +5,8 @@
 int main(){
     char filename[128];
     printf("Input filename to compile (max 128 characters):\n");
-    scanf("%s \n",&filename);
-    printf("Reading File...");
+    scanf("%s",&filename);
+    printf("\n Reading File...\n");
     FILE *file = fopen(filename, "r");
     FILE *wfile = fopen(strcat(filename, ".bin"), "wb");
     char line[128];
@@ -130,6 +130,27 @@ int main(){
 
             fwrite(&binary, sizeof(uint32_t), 1, wfile);
             printf("compiled jmp %d\n", binary);
+
+        }elseif(strcmp(ptr, "jmpeq")==0){
+            binary = 0b00001001000000000000000000000000;
+
+            ptr = strtok(NULL," ");
+            if(ptr[0]=='r'){ptr+=1;}
+            uint8_t num = (uint8_t)atoi(ptr);
+            binary |= (uint32_t)num << 16;
+
+            ptr = strtok(NULL," ");
+            if(ptr[0]=='r'){ptr+=1;}
+            num = (uint8_t)atoi(ptr);
+            binary |= (uint32_t)num << 8;
+
+            ptr = strtok(NULL," ");
+            if(ptr[0]=='r'){ptr+=1;}
+            num = (uint8_t)atoi(ptr);
+            binary |= (uint32_t)num;
+            
+            fwrite(&binary, sizeof(uint32_t), 1, wfile);
+            printf("compiled jmpeq %d\n", binary);
 
         } else{
             printf("Error\n");
