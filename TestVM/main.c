@@ -1,8 +1,4 @@
-/* ========NOTES=========
-Bits: 32
-Opcode 
-00000001 00000001 00000001 00001010
-*/
+
 //-------Inports-----------
 #include <stdint.h>
 #include <stdio.h>
