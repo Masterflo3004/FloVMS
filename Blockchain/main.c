@@ -35,7 +35,15 @@ struct sockaddr_in dest;
 int mastersocket;
 
 char buffer[MAXRECVLEN + 1] ;
-
+struct transaction{
+    __int128_t receiver;
+    __int128_t sender;
+    __int128_t amount;
+}
+struct block{
+    int numner;
+    
+}
 
 //============main===============
 
