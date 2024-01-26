@@ -1,16 +1,31 @@
 #include <stdlib.h>
 #include <stdio.h>
 void host(){
-    printf("Starting host...\n");
-    //
+    printf("==========Host==========\n");
+    //setup VM
+    printf("Starting VM ...\n");
+    //start host
+    printf("Starting Host ...\n");
+    //main loop
+    while(1){
+        //manage incomming connections
+
+        //manage incomming packets
+    }
 
 }
 
 void join(){
-    printf("Starting client...\n");
-    //
+    printf("==========Client==========\n");
+    //setup VM
+    printf("Starting VM ...\n");
+    //start client
+    printf("Starting Client ...\n");
 
-    
+    while(1){
+        
+    }
+
 }
 
 
