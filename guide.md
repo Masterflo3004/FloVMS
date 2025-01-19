@@ -1,6 +1,6 @@
-Hello, this is my own small VM (Version 1.0). It just owns some small commands but the ground is build.
+Hello, this is my own small VM (Version 1.0). It just owns some small commands but the foundation is build.
 Here is a small guide how to use it. 
-First you need a File to compiele. You can find the example count.s file in this folder.
+First you need a File to compile. You can find the example count.s file in the examples folder.
 Then you need to compie it. Run compiler.c for that and input the files name . For example count.s .
 Now you should find a file called name.s.bin for example count.s.bin .
 Now you run main.c and input the name of the new created file. for example count.s.bin .
